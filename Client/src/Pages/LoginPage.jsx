@@ -120,7 +120,7 @@ const LoginPage = () => {
 
            {/*checkbox for Terms and privacy agreement */}
           <div className='flex items-center gap-2 text=sm text-gray-500' >
-            <input type="checkbox" required />
+            <input type="checkbox"  />
             <p>Agree to the terms of use & privacy policy.</p>
           </div>
 

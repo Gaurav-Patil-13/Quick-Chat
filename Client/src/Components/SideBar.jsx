@@ -20,7 +20,7 @@ const SideBar = () => {
 
   useEffect(()=>{
     getUsers();
-  }, [onlineUsers])
+  }, [])
   
   return (
     // Sidebar container (hidden on small screens when a user is selected)
@@ -82,6 +82,13 @@ const SideBar = () => {
             <div
               onClick={() => {
                 setSelectedUser(user);
+                setUnSeenMessages(prev => {
+                  if (!prev?.[user._id]) return prev; // nothing to clear
+
+                  const updated = { ...prev };
+                  delete updated[user._id]; // or set to 0
+                  return updated;
+                });
               }}
               key={index}
               className={`relative flex items-center gap-2 p-2 pl-4 rounded cursor-pointer max-sm:text-sm 

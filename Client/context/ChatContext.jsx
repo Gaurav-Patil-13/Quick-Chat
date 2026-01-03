@@ -20,7 +20,11 @@ export const ChatProvider = ({children}) =>{
             const {data} = await axios.get("/api/messages/users");
             if(data.success){
                 setUsers(data.users)
-                setUnSeenMessages(data.unSeenMessages)
+                // setUnSeenMessages(data.unSeenMessages)
+                setUnSeenMessages((prev) => ({
+                ...prev,
+                ...data.unSeenMessages,
+                }));
             }
         } catch (error) {
             toast.error(error.message)
@@ -44,7 +48,7 @@ export const ChatProvider = ({children}) =>{
     // function to send message to selected user
     const sendMessage = async (messageData)=>{
         try {
-            const {data} = await axios.post(`/api/messages.send/${selectedUser._id}`,messageData)
+            const {data} = await axios.post(`/api/messages/send/${selectedUser._id}`,messageData)
             if(data.success){
                 setMessages((prevMessages)=>[...prevMessages, data.newMessage])
             }
@@ -99,7 +103,7 @@ export const ChatProvider = ({children}) =>{
         users,  
         selectedUser,
         getUsers,
-        setMessages,
+        getMessages,
         sendMessage,
         setSelectedUser,
         unSeenMessages,
