@@ -1,18 +1,21 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import assets from "../assets/assets";
+import { AuthContext } from "../../context/AuthContext";
 
 // ProfilePage allows users to update their profile image, name, and bio
 const ProfilePage = () => {
+
+  const { authUser, updateProfile} = useContext(AuthContext)
 
   // Stores selected profile image file (used for preview before saving)
   const [selectedImg, setSelectedImg] = useState();
 
   // Stores user's display name
-  const [name, setName] = useState("Martin Johnson");
+  const [name, setName] = useState(authUser.fullName);
 
   // Stores user's short profile bio
-  const [bio, setBio] = useState("Hi Everyone, I am using QuickChat");
+  const [bio, setBio] = useState(authUser.bio);
 
   // Used for navigating back after profile update
   const navigate = useNavigate();
@@ -21,8 +24,21 @@ const ProfilePage = () => {
   const handleSubmit = async (event)=>{
     event.preventDefault();
 
-    // After saving profile details, redirect user to home page
-    navigate('/');
+    if(!selectedImg){
+      await updateProfile({fullName : name, bio});
+      // After saving profile details, redirect user to home page
+      navigate('/');
+      return ;
+    }
+
+    const reader = new FileReader();
+    reader.readAsDataURL(selectedImg);
+    reader.onload = async ()=>{
+      const base64Image = reader.result;
+      await updateProfile({profilePic : base64Image, fullName: name, bio});
+      navigate('/');
+    }
+
   }
 
   return (
@@ -51,6 +67,7 @@ const ProfilePage = () => {
               id="avatar"
               accept=".png, .jpg, .jpeg"
               hidden
+              onChange={(e) => setSelectedImg(e.target.files[0])}
             />
 
             {/* Image preview (selected image or default avatar) */}
@@ -98,9 +115,9 @@ const ProfilePage = () => {
 
         {/* Right-side branding / logo */}      
         <img 
-         src={assets.logo_icon} 
+         src={authUser?.profilePic ||assets.logo_icon} 
          alt=""
-         className="max-w-44 aspect-square rounded-full mx-10 max-sm:mt-10" 
+         className={`max-w-44 aspect-square rounded-full mx-10 max-sm:mt-10 ${selectedImg && "rounded-full"}`} 
         />
 
       </div>

@@ -1,18 +1,31 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import assets from "../assets/assets";
-import ProfilePage from "../Pages/ProfilePage";
 import { useNavigate } from "react-router-dom";
-import { userDummyData } from "./../assets/assets";
+import { AuthContext } from "../../context/AuthContext";
+import { ChatContext } from "../../context/ChatContext";
 
 // Sidebar component that shows user list, search, and menu actions
-const SideBar = ({ selectedUser, setSelectedUser }) => {
+const SideBar = () => {
+
+  const {getUsers, users, selectedUser, setSelectedUser, unSeenMessages, setUnSeenMessages} = useContext(ChatContext)
+
+  const {logout, onlineUsers} = useContext(AuthContext)
+
+  const [input, setInput ] =useState(false);
+
   // Used for programmatic navigation (Profile page, etc.)
   const navigate = useNavigate();
 
+  const filteredUsers = input && users ? users.filter((user)=> user.fullName.toLowerCase().includes(input.toLowerCase())) : users || [];
+
+  useEffect(()=>{
+    getUsers();
+  }, [onlineUsers])
+  
   return (
     // Sidebar container (hidden on small screens when a user is selected)
     <div
-      className={`bg-[#8185B2]/10 h-full p-5 rounnded-r-xl overflow-y-scroll text-white 
+      className={`bg-[#8185B2]/10 h-full p-5 rounded-r-xl overflow-y-scroll text-white 
       ${selectedUser ? "max-md:hidden" : ""}`}
     >
       <div className="pb-5">
@@ -37,7 +50,7 @@ const SideBar = ({ selectedUser, setSelectedUser }) => {
             >
               {/* Navigate to profile edit page */}
               <p
-                onClick={() => navigate("./Profile")}
+                onClick={() => navigate("/Profile")}
                 className="cursor-pointer text-sm"
               >
                 Edit Profile
@@ -46,7 +59,7 @@ const SideBar = ({ selectedUser, setSelectedUser }) => {
               <hr className="my-2 border-t border-gray-500" />
 
               {/* Logout action */}
-              <p className="cursor-pointer text-sm">Logout</p>
+              <p onClick={()=>logout()} className="cursor-pointer text-sm">Logout</p>
             </div>
           </div>
         </div>
@@ -55,6 +68,7 @@ const SideBar = ({ selectedUser, setSelectedUser }) => {
         <div className="bg-[#282142] rounded-full flex items-center gap-2 py-3 px-4 mt-5">
           <img src={assets.search_icon} alt="Search" className="w-3" />
           <input
+            onChange={(e) => setInput(e.target.value) }
             type="text"
             className="bg-transperent border-none outline-none text-white text-xs placeholder-[#c8c8c8] flex-1"
             placeholder="Search User..."
@@ -63,7 +77,7 @@ const SideBar = ({ selectedUser, setSelectedUser }) => {
 
         {/* Search bar for filtering users */}
         <div className="flex flex-col">
-          {userDummyData.map((user, index) => (
+          {filteredUsers.map((user, index) => (
             // Single user row (click selects the user)
             <div
               onClick={() => {
@@ -84,18 +98,18 @@ const SideBar = ({ selectedUser, setSelectedUser }) => {
               <div className="flex flex-col leading-5">
                 <p>{user.fullName}</p>
 
-                {/*  online/offline status based on index */}
-                {index < 3 ? (
-                  <span className="text-green-400 text-xs">Online</span>
-                ) : (
-                  <span className="textneutral-400 text-xs">Offline</span>
-                )}
+                {/*  online/offline status */}
+                {
+                  onlineUsers?.includes(user._id)
+                  ? ( <span className="text-green-400 text-xs">Online</span>) 
+                  : ( <span className="text-neutral-400 text-xs">Offline</span>)
+                }
               </div>
 
               {/* Unread message  */}
-              {index > 2 && (
+              {unSeenMessages?.[user._id]>0 && (
                 <p className="absolute top-4 right-4 h-5 w-5 text-xs flex justify-center items-center rounded-full  bg-violet-500/50">
-                  {index}
+                  {unSeenMessages[user._id] || 0 }
                 </p>
               )}
             </div>
