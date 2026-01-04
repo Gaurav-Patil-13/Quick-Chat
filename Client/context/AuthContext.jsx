@@ -18,8 +18,8 @@ export const AuthProvider = ({children})=>{
     const [onlineUsers, setOnlineUsers] = useState([]);
     const [socket, setSocket] = useState(null);
      
+
     // check if user is autheneticated and if so, set the user data and connect the socket
-    
     const checkAuth = async ()=>{
         try {
             const {data} = await axios.get("/api/auth/check");
@@ -30,7 +30,7 @@ export const AuthProvider = ({children})=>{
 
         } catch (error) {
             toast.error(error.message)
-        }
+        } 
     }
 
     // Login function to handle user authenticate and socket connection
@@ -101,13 +101,27 @@ export const AuthProvider = ({children})=>{
 
     } 
 
+    // useEffect(()=>{
+    //     if(token){
+    //         axios.defaults.headers.common["token"] = token;
+    //     }
+    //     checkAuth();
+    // }, [])
+    
     useEffect(()=>{
         if(token){
             axios.defaults.headers.common["token"] = token;
+            checkAuth();
+        } else {
+            delete axios.defaults.headers.common["token"];
+            setAuthUser(null);
+            setOnlineUsers([]);
+            socket?.disconnect();
         }
-        checkAuth();
-    }, [])
-    
+    }, [token])
+
+
+
     const value = {
         axios,
         authUser,

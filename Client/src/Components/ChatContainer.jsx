@@ -5,6 +5,9 @@ import { ChatContext } from '../../context/ChatContext';
 import { AuthContext } from '../../context/AuthContext';
 
 const ChatContainer = ({}) => {
+
+  const chatBodyRef = useRef(null);
+  const scrollEnd = useRef();
   
   const {messages, selectedUser, setselectedUser, sendMessage, getMessages} = useContext(ChatContext)
   const { authUser, onlineUsers} = useContext(AuthContext)
@@ -44,13 +47,18 @@ const ChatContainer = ({}) => {
   },[selectedUser])
 
   
-  const scrollEnd = useRef();
-  
-  useEffect(()=>{
-    if(scrollEnd.current && messages){
-      scrollEnd.current.scrollIntoView({behavior : "smooth"})
-      }
-  },[messages])
+  // useEffect(()=>{
+  //   if(scrollEnd.current && messages){
+  //     scrollEnd.current.scrollIntoView({behavior : "smooth"})
+  //     }
+  // },[messages])
+
+  useEffect(() => {
+  if(chatBodyRef.current){
+      chatBodyRef.current.scrollTop = chatBodyRef.current.scrollHeight;
+  }
+  }, [messages]);
+
 
   
   return selectedUser ?(
@@ -74,7 +82,7 @@ const ChatContainer = ({}) => {
        </div>
 
     {/*-------------- chat area----------------- */}
-       <div className='flex flex-col h-[calc(100%-120px)] overflow-y-scroll p-3 pb-6'>
+       <div  ref={chatBodyRef} className='flex flex-col h-[calc(100%-120px)] overflow-y-scroll p-3 pb-6'>
 
           {messages?.map((msg, index)=>(
             // showing image 

@@ -5,7 +5,7 @@ import { AuthContext } from '../../context/AuthContext';
 const LoginPage = () => {
 
   // Controls whether user is on "Sign up" or "Login"
-  const [currState, setCurrState] = useState("Sign up")
+  const [currState, setCurrState] = useState("Login")
 
   // Form input states
   const [fullName, setFullName] = useState("")
@@ -105,8 +105,12 @@ const LoginPage = () => {
           {
               currState === "Sign up" && isDataSubmitted &&(
               <textarea rows={4}
-              onChange={(e)=>setBio(e.target.value)} value={bio}
-              className='p-2 resize-none  border-2 border-gray-500 rounded-md focus:outline-none focus:ring-2 focus-indigo-500' placeholder='Provide a short bio...' required ></textarea>
+                onChange={(e)=>setBio(e.target.value)} 
+                value={bio}
+                className='p-2 resize-none border-2 border-gray-500 rounded-md focus:outline-none focus:ring-2 focus-indigo-500' 
+                placeholder='Provide a short bio...' 
+                required >
+              </textarea>
             )
           }
 
@@ -118,7 +122,7 @@ const LoginPage = () => {
             {currState === "Sign up" ? "Create Account" : "Login Now" }
           </button>
 
-           {/*checkbox for Terms and privacy agreement */}
+          {/*checkbox for Terms and privacy agreement */}
           <div className='flex items-center gap-2 text=sm text-gray-500' >
             <input type="checkbox"  />
             <p>Agree to the terms of use & privacy policy.</p>
@@ -132,7 +136,10 @@ const LoginPage = () => {
                 <p className='text-sm text-gray-600' > 
                   Alredy have an account?
                   <span 
-                    onClick={()=>{setCurrState('Login'); setIsDataSubmitted(false)}}
+                    onClick={()=>{
+                      setCurrState('Login'); 
+                      setIsDataSubmitted(false);
+                    }}
                     className='font-medium text-violet-500 cursor-pointer' >
                     Login here
                   </span>  
@@ -141,7 +148,11 @@ const LoginPage = () => {
                 <p className='text-sm text-gray-600'>
                   Create an account 
                   <span 
-                    onClick={()=>setCurrState('Sign up') } 
+                    onClick={()=>{
+                      setCurrState('Sign up'); 
+                      setEmail("");
+                      setPassword("");
+                    }} 
                     className='font-medium text-violet-500 cursor-pointer' >
                     Click here
                   </span>
