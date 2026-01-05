@@ -3,6 +3,7 @@ import assets, { messagesDummyData } from '../assets/assets'
 import { formatMessageTime } from '../Lib/utils';
 import { ChatContext } from '../../context/ChatContext';
 import { AuthContext } from '../../context/AuthContext';
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 const ChatContainer = ({}) => {
 
@@ -72,7 +73,7 @@ const ChatContainer = ({}) => {
   
   return selectedUser ?(
     // if you clicked on any person 
-    <div className='h-full overflow-scroll relative backdrop-blur-lg'>
+    <div className='h-full min-h-0 flex flex-col backdrop-blur-lg'>
 
     {/*---------- header  ------------*/}
        {/* image and icon of person at top of chat box */}
@@ -88,21 +89,22 @@ const ChatContainer = ({}) => {
            {onlineUsers?.includes(selectedUser._id) &&<span className='green_dot w-2 h-2 rounded-full bg-green-500'></span>}
           </p>
           
-          {/* help icon */}
-          <img 
-            onClick={(e)=>{
-              e.stopPropagation();  
-              setSelectedUser(null)
-            }}
-             src={assets.arrow_icon} 
-             alt="" 
-             className='md:hidden max-w-7' 
-            />
+          {/* help icon */} 
+          <button
+              onClick={(e)=>{
+                e.stopPropagation();  
+                setSelectedUser(null)
+              }}
+              className=" md:hidden
+                          bg-[#8185B2]/10 text-white text-2xl px-3 py-1 rounded-lg"
+              >
+          <IoMdArrowRoundBack />
+          </button>
           <img src={assets.help_icon} alt="" className='max-md:hidden max-w-5' />
        </div>
 
     {/*-------------- chat area----------------- */}
-       <div  ref={chatBodyRef} className='flex flex-col h-[calc(100%-120px)] overflow-y-scroll p-3 pb-6'>
+       <div  ref={chatBodyRef} className='flex-1 min-h-0 overflow-y-auto p-3 pb-6'>
 
           {messages?.map((msg, index)=>(
             // showing image 
@@ -143,7 +145,7 @@ const ChatContainer = ({}) => {
        </div> 
 
     {/* ---------------- bottom area (writing message area)----------------- */}
-        <div className='absolute bottom-0 left-0 right-0 flex items-center gap-3 p-3'>
+        <div className='shrink-0 flex items-center gap-3 p-3 border-t border-white/10'>
             <div className='flex-1 flex items-center bg-gray-100/12 px-3 rounded-full'>
               {/* writing text area */}
               <input 
@@ -184,7 +186,7 @@ const ChatContainer = ({}) => {
   ) 
    // if you doesn't clicked on any person (by default  )
   : (
-    <div className='flex flex-col items-center justify-center gap-2 text-gray-500 bg-white/10 max-md:hidden'>
+    <div className='flex flex-col h-full min-h-0 flex flex-col items-center justify-center gap-2 text-gray-500 bg-white/10 max-md:hidden'>
         <img src={assets.logo_icon} alt="" className='max-w-16' />
         <p className='text-lg font-medium text-white'>Chat anytime, anywhere</p>
     </div>

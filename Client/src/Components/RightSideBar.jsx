@@ -2,12 +2,13 @@ import React, { useContext, useEffect, useState } from 'react'
 import { ChatContext } from '../../context/ChatContext'
 import { AuthContext } from '../../context/AuthContext'
 import assets from '../assets/assets'
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 
 const RightSideBar = ({}) => {
 
 
-  const {selectedUser, messages } = useContext(ChatContext)
+  const {selectedUser, messages, setShowProfile } = useContext(ChatContext)
   const {logout, onlineUsers} = useContext(AuthContext)
   const [msgImages, setMsgImages] = useState([]);
 
@@ -23,53 +24,67 @@ const RightSideBar = ({}) => {
 
     // Main div 
     // Main sidebar container (hidden on small screens when no user is selected)
-    <div className={`bg-[#8185B2]/10 text-white w-full relative overflow-y-scroll {selectedUser ? "max-md:hidden" :""} `}>
+    <div className={`bg-[#8185B2]/10 text-white w-full h-full min-h-0 flex flex-col relative `}>
 
-        {/* Header */}
-        <div className='profile_pic pt-16 flex flex-col items-center gap-2 text-xs font-light mx-auto'>
 
-            {/* profile pic */}
-            <img 
-                src={selectedUser?.profilePic || assets.avatar_icon} 
-                alt="Profile" 
-                className='w-20 aspect-[1/1] rounded-full' 
-            />
 
-            {/* online status indicator */}
-            <h1 className='name px-10 text-xl font-medium mx-auto flex items-center gap-2'>
-                {onlineUsers.includes(selectedUser._id) && <p className='w-2 h-2 rounded-full bg-green-500'></p> }
-                {selectedUser.fullName}
-            </h1>
-
-            {/* Short user bio */}
-            <p className='bio px-10 mx-auto'>
-                {selectedUser.bio}
-            </p>
-
-        </div>
-
-        {/* Divider between profile and media section */}
-        <hr className='border-[#ffffff50] my-4' />
-
-        {/* Media section showing shared images */}
-        <div className='px-5 text-xs'>
-            <p>Media</p>
-
-            {/* Scrollable grid of shared media thumbnails */}
-            <div className='media mt-2 max-h-[200px] overflow-y-scroll grid grid-cols-2 gap-4 opacity-80 '>
-                {msgImages.map((url,index)=>(
-                    <div 
-                     key={index} 
-                     onClick={()=>window.open(url)} 
-                     className='cursor-pointer rounded'
+        <div className='flex flex-row'>
+            <div className="flex-1 min-h-0 overflow-y-auto">
+                <button
+                    onClick={() => setShowProfile(false)}
+                    className=" absolute top-4 right-4 z-10
+                                bg-[#8185B2]/10 text-white text-2xl px-3 py-1 rounded-lg"
                     >
-                        <img 
-                            src={url} 
-                            alt="shared Media" 
-                            className='h-full rounded-md' 
-                        />
+                <IoMdArrowRoundBack />
+                </button>
+                {/* Header */}
+                <div className='profile_pic pt-16 flex flex-col items-center gap-2 text-xs font-light mx-auto'>
+
+                    {/* profile pic */}
+                    <img 
+                        src={selectedUser?.profilePic || assets.avatar_icon} 
+                        alt="Profile" 
+                        className='w-20 aspect-[1/1] rounded-full' 
+                    />
+
+                    {/* online status indicator */}
+                    <h1 className='name px-10 text-xl font-medium mx-auto flex items-center gap-2'>
+                        {onlineUsers.includes(selectedUser._id) && <p className='w-2 h-2 rounded-full bg-green-500'></p> }
+                        {selectedUser.fullName}
+                    </h1>
+
+                    {/* Short user bio */}
+                    <p className='bio px-10 mx-auto'>
+                        {selectedUser.bio}
+                    </p>
+                    
+
+                </div>
+
+                {/* Divider between profile and media section */}
+                <hr className='border-[#ffffff50] my-4' />
+
+                {/* Media section showing shared images */}
+                <div className='px-5 text-xs'>
+                    <p>Media</p>
+
+                    {/* Scrollable grid of shared media thumbnails */}
+                    <div className='media mt-2 max-h-[250px] overflow-y-scroll grid grid-cols-4 gap-1 opacity-80 '>
+                        {msgImages.map((url,index)=>(
+                            <div 
+                            key={index} 
+                            onClick={()=>window.open(url)} 
+                            className='cursor-pointer rounded'
+                            >
+                                <img 
+                                    src={url} 
+                                    alt="shared Media" 
+                                    className='h-full rounded-md' 
+                                />
+                            </div>
+                        ))}
                     </div>
-                ))}
+                </div>
             </div>
         </div>
 

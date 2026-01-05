@@ -23,13 +23,13 @@ const SideBar = () => {
   }, [])
   
   return (
-    // Sidebar container (hidden on small screens when a user is selected)
+    // -------Sidebar container------- (hidden on small screens when a user is selected)
     <div
-      className={`bg-[#8185B2]/10 h-full p-5 rounded-r-xl overflow-y-scroll text-white 
+      className={`bg-[#8185B2]/10 h-full p-5 min-h-0 rounded-r-xl flex flex-col text-white 
       ${selectedUser ? "max-md:hidden" : ""}`}
     >
-      <div className="pb-5">
-        {/*  Top section containing logo and menu icon(3 dots) */}
+      <div className="pb-5 shrink-0">
+        {/*-----------  Top section containing logo and menu icon(3 dots) --------*/}
         <div className="flex justify-between items-center">
           {/* Application logo */}
           <img src={assets.logo} alt="logo" className="max-w-40" />
@@ -64,7 +64,7 @@ const SideBar = () => {
           </div>
         </div>
 
-        {/* Search bar for filtering users */}
+        {/*------- Search bar for filtering users---------- */}
         <div className="bg-[#282142] rounded-full flex items-center gap-2 py-3 px-4 mt-5">
           <img src={assets.search_icon} alt="Search" className="w-3" />
           <input
@@ -75,8 +75,10 @@ const SideBar = () => {
           />
         </div>
 
+      </div>
+      
         {/* Search bar for filtering users */}
-        <div className="flex flex-col">
+        <div className="flex flex-col flex-1 overflow-y-auto">
           {filteredUsers.map((user, index) => (
             // Single user row (click selects the user)
             <div
@@ -122,7 +124,6 @@ const SideBar = () => {
             </div>
           ))}
         </div>
-      </div>
     </div>
   );
 };
