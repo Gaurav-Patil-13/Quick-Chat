@@ -6,6 +6,8 @@ import toast from "react-hot-toast";
 export const ChatContext = createContext();
 
 export const ChatProvider = ({children}) =>{
+       
+    const [showProfile,setShowProfile]=useState(true);
     
     const [messages, setMessages] = useState([]);
     const [users, setUsers] = useState([]);
@@ -102,6 +104,8 @@ export const ChatProvider = ({children}) =>{
         messages,
         users,  
         selectedUser,
+        showProfile,
+        setShowProfile,
         getUsers,
         getMessages,
         sendMessage,

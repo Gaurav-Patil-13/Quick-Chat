@@ -7,7 +7,7 @@ import { ChatContext } from "../../context/ChatContext";
 // Sidebar component that shows user list, search, and menu actions
 const SideBar = () => {
 
-  const {getUsers, users, selectedUser, setSelectedUser, unSeenMessages, setUnSeenMessages} = useContext(ChatContext)
+  const {getUsers, users, selectedUser, setSelectedUser, unSeenMessages, setUnSeenMessages, setShowProfile } = useContext(ChatContext)
 
   const {logout, onlineUsers} = useContext(AuthContext)
 
@@ -84,6 +84,7 @@ const SideBar = () => {
             <div
               onClick={() => {
                 setSelectedUser(user);
+                setShowProfile(false);
                 setUnSeenMessages(prev => {
                   if (!prev?.[user._id]) return prev; // nothing to clear
 

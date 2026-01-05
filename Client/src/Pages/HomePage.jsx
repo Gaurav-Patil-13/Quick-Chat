@@ -9,7 +9,6 @@ const HomePage = () => {
   const {selectedUser, showProfile} = useContext(ChatContext)
 
   return (
-
   <div className="border w-full h-screen overflow-hidden">
     <div className="w-full h-full sm:px-[15%] sm:py-[5%] box-border">
 
@@ -24,16 +23,19 @@ const HomePage = () => {
           </div> */}
       
       {/* DESKTOP */}
-      <div
+     <div
         className={`hidden md:grid h-full overflow-hidden
           backdrop-blur-xl border-2 border-gray-600 rounded-2xl
-          ${selectedUser ? 'grid-cols-[1fr_3fr]' : 'grid-cols-2'}
+          ${selectedUser ? "grid-cols-[1fr_3fr]" : "grid-cols-2"}
         `}
       >
         <SideBar />
 
-        {showProfile ? <RightSideBar /> : <ChatContainer />}
+        {selectedUser && (
+          showProfile ? <RightSideBar /> : <ChatContainer />
+        )}
       </div>
+
       {/* <div
         className={`hidden md:grid h-full min-h-0 overflow-hidden 
           backdrop-blur-xl border-2 border-gray-600 rounded-2xl
@@ -61,16 +63,16 @@ const HomePage = () => {
       </div> */}
 
       {/* MOBILE */}
-      <div className="md:hidden h-screen w-full overflow-hidden backdrop-blur-xl border-2 border-gray-600 rounded-lg">
-        {!selectedUser && <SideBar />}
-        {selectedUser && (showProfile ? <RightSideBar /> : <ChatContainer />)}
-      </div>
+     {/* {!selectedUser && <SideBar />}
+      {selectedUser && (
+        showProfile ? <RightSideBar /> : <ChatContainer />
+      )} */}
 
-      {/* <div className="md:hidden h-full overflow-hidden">
+      <div className="md:hidden h-full overflow-hidden">
         {!selectedUser && <SideBar />}
         {selectedUser && !showProfile && <ChatContainer />}
         {selectedUser && showProfile && <RightSideBar />}
-      </div> */}
+      </div>
 
 
     {/* <div className='border w-full h-screen sm:px-[15%] sm:py-[5%]'>

@@ -11,7 +11,7 @@ const ChatContainer = ({}) => {
   const chatBodyRef = useRef(null);
   const scrollEnd = useRef();
   
-  const {messages, selectedUser, setSelectedUser, sendMessage, getMessages} = useContext(ChatContext)
+  const {messages, selectedUser, setSelectedUser, sendMessage, getMessages, setShowProfile} = useContext(ChatContext)
   const { authUser, onlineUsers} = useContext(AuthContext)
   
   const [input , setInput] = useState('')
@@ -69,7 +69,9 @@ const ChatContainer = ({}) => {
 
     {/*---------- header  ------------*/}
        {/* image and icon of person at top of chat box */}
-       <div className='person_icon flex items-center gap-3 py-3 mx-4 border-b border-stone-500'>
+       <div
+         onClick={() => setShowProfile(true)}
+         className='person_icon flex items-center gap-3 py-3 mx-4 border-b border-stone-500'>
           <img src={selectedUser?.profilePic || assets.avatar_icon} alt="" className='w-8 rounded-full' />
 
           {/* name of person at top of chat box */}
@@ -82,7 +84,8 @@ const ChatContainer = ({}) => {
           {/* help icon */} 
           <button
               onClick={(e)=>{
-                e.stopPropagation();  
+                e.stopPropagation(); 
+                setShowProfile(false); 
                 setSelectedUser(null)
               }}
               className=" md:hidden
@@ -90,7 +93,9 @@ const ChatContainer = ({}) => {
               >
           <IoMdArrowRoundBack />
           </button>
-          <img src={assets.help_icon} alt="" className='max-md:hidden max-w-5' />
+          <img 
+          onClick={(e) => e.stopPropagation()}
+          src={assets.help_icon} alt="" className='max-md:hidden max-w-5' />
        </div>
 
     {/*-------------- chat area----------------- */}
