@@ -30,7 +30,7 @@ const LoginPage = () => {
       return;
     }
 
-    login(currState === "Sign up" ? 'signup': 'login', {fullName, email, password, bio})
+    login(currState === "Sign up" ? 'Signup': 'login', {fullName, email, password, bio})
 
   }
 
@@ -39,7 +39,7 @@ const LoginPage = () => {
     <div className="min-h-screen bg-cover flex items-center justify-center gap-8 
       sm:justify-evenly max-sm:flex-col backdrop-blur-2xl">
       
-      {/*------ left side  (logo )-------- */}
+      {/* left side  (logo ) */}
       <img src={assets.logo_big} alt="" className='w-[min(30vw, 250px)]' />
 
       {/* right side authentication form  */}
@@ -59,9 +59,9 @@ const LoginPage = () => {
               }
           </h2>
 
-          {/*----- Sign up box------  */}
+          {/* Sign up box  */}
 
-          {/* Full Name input (Sign up – Step 1 only) */}
+           {/* Full Name input (Sign up – Step 1 only) */}
           {
             currState === "Sign up" && !isDataSubmitted &&(
               <input 
@@ -75,7 +75,6 @@ const LoginPage = () => {
               
               ) 
           }
-          
 
           {/* Email & Password inputs (Login + Sign up – Step 1) */}
           {
@@ -102,9 +101,7 @@ const LoginPage = () => {
               </>
             )
           }
-          
-
-          {/* text area Bio input (Sign up – Step 2 only) */}
+           {/* text area Bio input (Sign up – Step 2 only) */}
           {
               currState === "Sign up" && isDataSubmitted &&(
               <textarea rows={4}
@@ -117,16 +114,13 @@ const LoginPage = () => {
             )
           }
 
-          
-          {/* Submit button changing background from purple to violet */}
+           {/* Submit button changing background from purple to violet */}
           <button 
             type='submit'
-
             className='py-3 bg-gradient-to-r from-purple-400 to-violet-600 text-white rounded-md cursor-pointer ' 
           >
             {currState === "Sign up" ? "Create Account" : "Login Now" }
           </button>
-
 
           {/*checkbox for Terms and privacy agreement */}
           <div className='flex items-center gap-2 text=sm text-gray-500' >
@@ -134,8 +128,7 @@ const LoginPage = () => {
             <p>Agree to the terms of use & privacy policy.</p>
           </div>
 
-
-          {/* Toggle between Login and Sign up */}  
+        {/* Toggle between Login and Sign up */}  
           <div className='flex flex-col gap-2'>
             {
               currState === "Sign up" ? 

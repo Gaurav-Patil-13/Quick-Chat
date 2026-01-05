@@ -1,17 +1,17 @@
-import React, { useContext, useLayoutEffect, useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import assets, { messagesDummyData } from '../assets/assets'
 import { formatMessageTime } from '../Lib/utils';
 import { ChatContext } from '../../context/ChatContext';
 import { AuthContext } from '../../context/AuthContext';
 import { IoMdArrowRoundBack } from "react-icons/io";
+import toast from "react-hot-toast"
 
 const ChatContainer = ({}) => {
 
-  const msgRefs = useRef([]);
   const chatBodyRef = useRef(null);
-  // const scrollEnd = useRef();
+  const scrollEnd = useRef();
   
-  const {messages, selectedUser, setSelectedUser, setShowProfile, sendMessage, getMessages} = useContext(ChatContext)
+  const {messages, selectedUser, setSelectedUser, sendMessage, getMessages} = useContext(ChatContext)
   const { authUser, onlineUsers} = useContext(AuthContext)
   
   const [input , setInput] = useState('')
@@ -55,20 +55,12 @@ const ChatContainer = ({}) => {
   //     }
   // },[messages])
 
-  // useEffect(() => {
-  // if(chatBodyRef.current){
-  //     chatBodyRef.current.scrollTop = chatBodyRef.current.scrollHeight;
-  // }
-  // }, [messages]);
-
-
-  useLayoutEffect(() => {
-    const el = chatBodyRef.current;
-    if (!el) return;
-
-    // Instantly position at bottom BEFORE paint
-    el.scrollTop = el.scrollHeight;
+  useEffect(() => {
+  if(chatBodyRef.current){
+      chatBodyRef.current.scrollTop = chatBodyRef.current.scrollHeight;
+  }
   }, [messages]);
+
 
   
   return selectedUser ?(
@@ -77,10 +69,7 @@ const ChatContainer = ({}) => {
 
     {/*---------- header  ------------*/}
        {/* image and icon of person at top of chat box */}
-       <div  
-        onClick={() => setShowProfile(prev => !prev)} 
-        className='person_icon flex items-center gap-3 py-3 mx-4 border-b border-stone-500'
-      >
+       <div className='person_icon flex items-center gap-3 py-3 mx-4 border-b border-stone-500'>
           <img src={selectedUser?.profilePic || assets.avatar_icon} alt="" className='w-8 rounded-full' />
 
           {/* name of person at top of chat box */}
@@ -89,6 +78,7 @@ const ChatContainer = ({}) => {
            {onlineUsers?.includes(selectedUser._id) &&<span className='green_dot w-2 h-2 rounded-full bg-green-500'></span>}
           </p>
           
+
           {/* help icon */} 
           <button
               onClick={(e)=>{
@@ -108,12 +98,8 @@ const ChatContainer = ({}) => {
 
           {messages?.map((msg, index)=>(
             // showing image 
-            <div 
-              key={index} 
-              ref={(el) => (msgRefs.current[index] = el)}
-              className={`image flex items-end gap-2 justify-end 
-                ${msg.senderId !== authUser._id && 'flex-row-reverse'}`}
-            >
+            <div key={index} className={`image flex items-end gap-2 justify-end 
+              ${msg.senderId !== authUser._id && 'flex-row-reverse'}`}>
               {msg.image 
               ? (<img src={msg.image} alt="" className='max-w-[230px] border border-gray-700 rounded-lg overflow-hidden mb-8' />)
               : (// showing text
@@ -140,7 +126,7 @@ const ChatContainer = ({}) => {
             </div>
           ))}
 
-          {/* <div ref={scrollEnd}></div> */}
+          <div ref={scrollEnd}></div>
 
        </div> 
 
