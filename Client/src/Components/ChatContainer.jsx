@@ -140,7 +140,7 @@ const ChatContainer = ({}) => {
                 onKeyDown={(e)=> {if(e.key === "Enter") { handleSendMessage(e) }}}
                 type="text" 
                 placeholder='Send a Message' 
-                className='flex-1 text-sm p-3 border-none rounded-lg outline-none text-white placeholder-gray-400' 
+                className='flex-1 send text-sm p-3 border-none rounded-lg outline-none text-white placeholder-gray-400' 
               />
               {/* uploading image area  */}
               <input 
