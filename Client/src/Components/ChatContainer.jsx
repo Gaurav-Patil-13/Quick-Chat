@@ -1,17 +1,18 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
-import assets, { messagesDummyData } from '../assets/assets'
 import { formatMessageTime } from '../Lib/utils';
 import { ChatContext } from '../../context/ChatContext';
 import { AuthContext } from '../../context/AuthContext';
 import { IoMdArrowRoundBack } from "react-icons/io";
 import toast from "react-hot-toast"
+import assets from '../assets/assets';
 
 const ChatContainer = ({}) => {
 
   const chatBodyRef = useRef(null);
   const scrollEnd = useRef();
+  const inputRef = useRef(null);
   
-  const {messages, selectedUser, setSelectedUser, sendMessage, getMessages, setShowProfile} = useContext(ChatContext)
+  const {messages, selectedUser, setSelectedUser, sendMessage, getMessages, showProfile, setShowProfile} = useContext(ChatContext)
   const { authUser, onlineUsers} = useContext(AuthContext)
   
   const [input , setInput] = useState('')
@@ -44,9 +45,18 @@ const ChatContainer = ({}) => {
   
   useEffect (()=>{
     if(selectedUser){
-      getMessages(selectedUser._id)
+      getMessages(selectedUser._id);
+       setInput("");
     }
   },[selectedUser])
+
+  useEffect(() => {
+  if (selectedUser && !showProfile) {
+    setTimeout(() => {
+      inputRef.current?.focus();
+    }, 50);
+  }
+}, [selectedUser, showProfile]);
 
   
   // useEffect(()=>{
@@ -89,13 +99,13 @@ const ChatContainer = ({}) => {
                 setSelectedUser(null)
               }}
               className=" md:hidden
-                          bg-[#8185B2]/10 text-white text-2xl px-3 py-1 rounded-lg"
+                          bg-[#8185B2]/20 text-white text-2xl px-3 py-1 rounded-lg active:bg-[#8185B2]/30 transition"
               >
           <IoMdArrowRoundBack />
           </button>
           <img 
           onClick={(e) => e.stopPropagation()}
-          src={assets.help_icon} alt="" className='max-md:hidden max-w-5' />
+          src={assets.help_icon} alt="" className='max-md:hidden max-w-5 hover:opacity-50 ' />
        </div>
 
     {/*-------------- chat area----------------- */}
@@ -140,6 +150,7 @@ const ChatContainer = ({}) => {
             <div className='flex-1 flex items-center bg-gray-100/12 px-3 rounded-full'>
               {/* writing text area */}
               <input 
+                ref={inputRef}
                 onChange={(e)=>setInput(e.target.value)}
                 value={input}
                 onKeyDown={(e)=> {if(e.key === "Enter") { handleSendMessage(e) }}}

@@ -10,7 +10,9 @@ const HomePage = () => {
 
   return (
   <div className="border w-full h-screen overflow-hidden">
-    <div className="w-full h-full sm:px-[15%] sm:py-[5%] box-border">
+
+    {/* if i removed sm:px-[15%] sm:py-[5%] then this will take full screen size which looks more better */}
+    <div className="w-full h-full sm:px-[15%] sm:py-[5%] box-border"> 
 
         {/* <div className={`backdrop-blur-xl border-2 border-gray-600 rounded-2xl 
             overflow-hidden h-[100%] grid grid-cols-1 relative 
@@ -68,7 +70,7 @@ const HomePage = () => {
         showProfile ? <RightSideBar /> : <ChatContainer />
       )} */}
 
-      <div className="md:hidden h-full overflow-hidden">
+      <div className="md:hidden h-full overflow-hidden backdrop-blur-xl">
         {!selectedUser && <SideBar />}
         {selectedUser && !showProfile && <ChatContainer />}
         {selectedUser && showProfile && <RightSideBar />}

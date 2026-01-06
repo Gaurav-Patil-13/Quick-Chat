@@ -2,10 +2,11 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import assets from "../assets/assets";
 import { AuthContext } from "../../context/AuthContext";
-
+import {IoMdArrowRoundBack} from "react-icons/io"
+import { ChatContext } from "../../context/ChatContext";
 // ProfilePage allows users to update their profile image, name, and bio
 const ProfilePage = () => {
-
+  
   const { authUser, updateProfile} = useContext(AuthContext)
 
   // Stores selected profile image file (used for preview before saving)
@@ -45,15 +46,29 @@ const ProfilePage = () => {
     // Main page container centered both vertically and horizontally 
     <div className="min-h-screen bg-cover bg-no-repeat flex items-center justify-center">
 
+      
       {/* Profile card container */}
       <div
-        className="w-5/6 max-w-2xl backdrop-blur-2xl text-gray-300 border-2 border-gray-600 
+        className="relative w-5/6 max-w-2xl backdrop-blur-2xl text-gray-300 border-2 border-gray-600 
         flex items-center justify-between max-sm:flex-col-reverse rounded-lg "
       >
         {/* Profile edit form */} 
         <form onSubmit={handleSubmit} className="flex flex-col gap-5 p-10 flex-1 ">
           
-          <h3 className="text-lg">Profile details</h3>
+          {/* <div className="flex justify-between"> */}
+            <h3 className="text-lg">Profile details</h3>
+            {/* <button
+                onClick={(e)=>{
+                  // e.stopPropagation(); 
+                  // setShowProfile(false); 
+                  // setSelectedUser(null)
+                }}
+                className=" 
+                            bg-[#8185B2]/10 text-white text-2xl px-3 py-1 rounded-lg"
+                >
+            <IoMdArrowRoundBack />
+            </button> */}
+          {/* </div> */}
 
           {/* Profile image upload with preview */}
           <label
@@ -113,12 +128,30 @@ const ProfilePage = () => {
 
         </form>
 
-        {/* Right-side branding / logo */}      
+        {/* Right-side branding / logo */}    
+        
+        {/* <div className="flex flex-col absolute top-4 right-4"> */}
+         <button
+                onClick={(e)=>{
+                  navigate(-1)
+                }}
+                className=" absolute top-4 right-4 sm:top-4 sm:right-4 z-30
+                  bg-[#8185B2]/20 backdrop-blur-md
+                  text-white text-xl
+                  px-3 py-2 rounded-lg
+                  hover:bg-[#8185B2]/30
+                  active:bg-[#8185B2]/30
+                  transition"
+                >
+            <IoMdArrowRoundBack />
+            </button>
+
         <img 
          src={authUser?.profilePic ||assets.logo_icon} 
          alt=""
          className={`max-w-44 aspect-square rounded-full mx-10 max-sm:mt-10 ${selectedImg && "rounded-full"}`} 
         />
+        {/* </div> */}
 
       </div>
     </div>

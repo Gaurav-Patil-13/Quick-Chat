@@ -13,6 +13,10 @@ const SideBar = () => {
 
   const [input, setInput ] =useState(false);
 
+  const [showMenu, setShowMenu] = useState(false);
+
+  
+
   // Used for programmatic navigation (Profile page, etc.)
   const navigate = useNavigate();
 
@@ -35,22 +39,33 @@ const SideBar = () => {
           <img src={assets.logo} alt="logo" className="max-w-40" />
 
           {/* Menu icon with hover-based dropdown */}
-          <div className="relative py-2 group">
+          <div className="relative py-2 ">
             <img
               src={assets.menu_icon}
               alt="Menu"
-              className="max-h-5 cursor-pointer"
+              className="max-h-5 cursor-pointer hover:opacity-50"
+              onClick={() => {
+                setShowMenu(true);
+
+                // auto close after 3 seconds
+                setTimeout(() => {
+                  setShowMenu(false);
+                }, 3000);
+              }}
             />
 
             {/* Dropdown menu (shown on hover) */}
             <div
-              className="absolute top-full right-0 z-20 w-32 p-5 bg-[#282142] 
+              className={`absolute top-full right-0 z-20 w-32 p-5 bg-[#282142] 
                        border border-gray-600 text-gray-100 rounded-md 
-                       hidden group-hover:block"
+                        ${showMenu ? "block" : "hidden"}`}
             >
               {/* Navigate to profile edit page */}
               <p
-                onClick={() => navigate("/Profile")}
+                onClick={() =>{
+                  setShowMenu(false);
+                  navigate("/Profile");
+                }}
                 className="cursor-pointer text-sm"
               >
                 Edit Profile
@@ -59,7 +74,10 @@ const SideBar = () => {
               <hr className="my-2 border-t border-gray-500" />
 
               {/* Logout action */}
-              <p onClick={()=>logout()} className="cursor-pointer text-sm">Logout</p>
+              <p onClick={()=>{
+                setShowMenu(false),
+                logout()
+              }} className="cursor-pointer text-sm">Logout</p>
             </div>
           </div>
         </div>

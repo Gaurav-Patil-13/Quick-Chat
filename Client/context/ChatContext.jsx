@@ -16,6 +16,14 @@ export const ChatProvider = ({children}) =>{
     
     const {socket , axios} = useContext(AuthContext)
 
+    // reset chat
+    const resetChat = () => {
+        setSelectedUser(null);
+        setShowProfile(false);
+        setMessages([]);
+        setUnSeenMessages({});
+    };
+
     // function to get all users for sidebar
     const getUsers = async()=>{
         try {
@@ -111,7 +119,8 @@ export const ChatProvider = ({children}) =>{
         sendMessage,
         setSelectedUser,
         unSeenMessages,
-        setUnSeenMessages
+        setUnSeenMessages,
+        resetChat,
     }
 
     return (

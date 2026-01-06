@@ -4,10 +4,10 @@ import { AuthContext } from '../../context/AuthContext'
 import assets from '../assets/assets'
 import { IoMdArrowRoundBack } from "react-icons/io";
 
-
 const RightSideBar = ({}) => {
-
-
+    
+    
+  const { resetChat } = useContext(ChatContext);
   const {selectedUser, messages, setShowProfile } = useContext(ChatContext)
   const {logout, onlineUsers} = useContext(AuthContext)
   const [msgImages, setMsgImages] = useState([]);
@@ -24,7 +24,7 @@ const RightSideBar = ({}) => {
 
     // Main div 
     // Main sidebar container (hidden on small screens when no user is selected)
-    <div className={`bg-[#8185B2]/10 text-white w-full h-full min-h-0 flex flex-col relative `}>
+    <div className={` text-white w-full h-full min-h-0 flex flex-col relative `}>
 
 
 
@@ -33,17 +33,17 @@ const RightSideBar = ({}) => {
                 <button
                     onClick={() => setShowProfile(false)}
                     className=" absolute top-4 right-4 z-10
-                                bg-[#8185B2]/10 text-white text-2xl px-3 py-1 rounded-lg"
+                                bg-[#8185B2]/20 text-white text-2xl px-3 py-1 rounded-lg hover:bg-[#8185B2]/30 active:bg-[#8185B2]/30"
                     >
                 <IoMdArrowRoundBack />
                 </button>
                 {/* Header */}
-                <div className='profile_pic pt-16 flex flex-col items-center gap-2 text-xs font-light mx-auto'>
+                <div className='profile_pic pt-8 flex flex-col items-center gap-2 text-xs font-light mx-auto'>
 
                     {/* profile pic */}
                     <img 
                         src={selectedUser?.profilePic || assets.avatar_icon} 
-                        alt="Profile" 
+                        alt="Profile"   
                         className='w-20 aspect-[1/1] rounded-full' 
                     />
 
@@ -69,7 +69,7 @@ const RightSideBar = ({}) => {
                     <p>Media</p>
 
                     {/* Scrollable grid of shared media thumbnails */}
-                    <div className='media mt-2 max-h-[250px] overflow-y-scroll grid grid-cols-4 gap-1 opacity-80 '>
+                    <div className="media mt-2 max-h-[300px] overflow-y-scroll grid grid grid-cols-3 md:grid-cols-5 gap-1 opacity-90 ">
                         {msgImages.map((url,index)=>(
                             <div 
                             key={index} 
@@ -90,7 +90,10 @@ const RightSideBar = ({}) => {
 
         {/* Logout button fixed at bottom of sidebar */}
         <button 
-           onClick={()=> logout()}
+           onClick={()=> {
+            resetChat();
+            logout()
+           }}
            className='logout absolute bottom-5 left-1/2 transform -translate-x-1/2 
              bg-gradient-to-r from-purple-400 to-violet-600 text-white border-none 
              text-sm font-light py-2 px-20 rounded-full cursor-pointer ' 
