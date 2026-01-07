@@ -66,7 +66,7 @@ export const AuthProvider = ({children})=>{
         setOnlineUsers([]);
         axios.defaults.headers.common["token"] = null;
         toast.success("Logged out successfully");
-        socket.disconnect();
+        socket?.disconnect();
     
     }
 
@@ -86,21 +86,49 @@ export const AuthProvider = ({children})=>{
 
 
     // connect socket function to handle socket connection and online users updates
-    const connectSocket = (userData)=>{
-        if(!userData || socket?.connected) return ;
-        const newSocket = io(backendUrl, {
-            transports: ["websocket"],
-            query: { userId: userData._id },
-        });
+    // const connectSocket = (userData)=>{
+    //     if(!userData || socket?.connected) return ;
+    //     const newSocket = io(backendUrl, {
+    //         query: { userId: userData._id },
+    //         withCredentials: true,
+    //         transports: ["websocket", "polling"],
+    //     });
 
-        newSocket.connect();
-        setSocket(newSocket);
+    //     newSocket.connect();
+    //     setSocket(newSocket);
 
-        newSocket.on("getOnlineUsers", (userIds)=>{
-            setOnlineUsers(userIds);
-        })
+    //     newSocket.on("getOnlineUsers", (userIds)=>{
+    //         setOnlineUsers(userIds);
+    //     })
 
-    } 
+    // } 
+
+    const connectSocket = (userData) => {
+    if (!userData) return;
+
+    if (socket) socket.disconnect();
+
+    const newSocket = io(backendUrl, {
+        query: { userId: userData._id },
+        withCredentials: true,
+        transports: ["websocket", "polling"],
+    });
+
+    setSocket(newSocket);
+
+    newSocket.on("connect", () => {
+        console.log("✅ Socket connected:", newSocket.id);
+    });
+
+    newSocket.on("getOnlineUsers", (userIds) => {
+        setOnlineUsers(userIds);
+    });
+
+    newSocket.on("disconnect", () => {
+        console.log("❌ Socket disconnected");
+    });
+    };
+
 
     // useEffect(()=>{
     //     if(token){
@@ -120,6 +148,13 @@ export const AuthProvider = ({children})=>{
             socket?.disconnect();
         }
     }, [token])
+
+    useEffect(() => {
+    return () => {
+        socket?.disconnect();
+    };
+    }, []);
+
 
 
 
