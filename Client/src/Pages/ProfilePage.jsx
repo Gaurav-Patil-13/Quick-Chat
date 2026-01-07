@@ -6,7 +6,7 @@ import {IoMdArrowRoundBack} from "react-icons/io"
 import { ChatContext } from "../../context/ChatContext";
 // ProfilePage allows users to update their profile image, name, and bio
 const ProfilePage = () => {
-  
+
   const { authUser, updateProfile} = useContext(AuthContext)
 
   // Stores selected profile image file (used for preview before saving)

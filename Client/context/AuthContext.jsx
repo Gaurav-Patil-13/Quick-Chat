@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 axios.defaults.baseURL = backendUrl;
+axios.defaults.withCredentials = true;
+
 
 export const AuthContext = createContext();
 
@@ -87,9 +89,8 @@ export const AuthProvider = ({children})=>{
     const connectSocket = (userData)=>{
         if(!userData || socket?.connected) return ;
         const newSocket = io(backendUrl, {
-            query :{
-                userId : userData._id,
-            }
+            transports: ["websocket"],
+            query: { userId: userData._id },
         });
 
         newSocket.connect();
