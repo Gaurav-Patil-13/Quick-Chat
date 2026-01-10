@@ -6,9 +6,6 @@ import mongoose from "mongoose";
 // Middleware to protect private routes using JWT authentication
 export const protectRoute = async (req, res, next) =>{
     try {
-
-
-        
         if (mongoose.connection.readyState !== 1) {
         return res.status(503).json({
             success: false,
@@ -18,10 +15,6 @@ export const protectRoute = async (req, res, next) =>{
 
          // 1. Get token from Authorization header 
         const token  = req.headers.token;
-
-
-
-        
 
         // 2. Verify the token using the JWT secret key
         const decoded = jwt.verify(token, process.env.JWT_SECRET)

@@ -117,7 +117,7 @@ export const AuthProvider = ({children})=>{
     setSocket(newSocket);
 
     newSocket.on("connect", () => {
-        console.log("✅ Socket connected:", newSocket.id);
+        console.log("Socket connected:", newSocket.id);
     });
 
     newSocket.on("getOnlineUsers", (userIds) => {
@@ -125,7 +125,7 @@ export const AuthProvider = ({children})=>{
     });
 
     newSocket.on("disconnect", () => {
-        console.log("❌ Socket disconnected");
+        console.log("Socket disconnected");
     });
     };
 
