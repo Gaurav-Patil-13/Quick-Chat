@@ -13,24 +13,24 @@ The project follows a modern client-server architecture where React handles the 
 
 ## 📑 Table of Contents
 
-* ✨ [Features](#Features)
-* 🏗️ [System Architecture](#system-architecture)
-* 🌐 [High-Level System Design](#high-level-system-design)
-* 📂 [Project Structure](#project-structure)
-* 🔄 [Data Flow Diagrams](#data-flow-diagrams)
-* ⚙️ [Request Processing Flow](#request-processing-flow)
-* 📡 [Real-Time Messaging Architecture](#real-time-messaging-architecture)
-* 🗄️ [Database Schema](#database-schema)
-* 🎯 [Design Decisions](#design-decisions)
-* 🚀 [How to Use QuickChat](#how-to-use-quickchat)
-* 💻 [Tech Stack](#tech-stack)
-* 🔮 [Future Improvements](#future-improvements)
-* 👨‍💻 [Author](#author)
+- ✨ [Features](#features)
+- 🏗️ [System Architecture](#system-architecture)
+- 🌐 [High-Level System Design](#high-level-system-design)
+- 📂 [Project Structure](#project-structure)
+- 🔄 [Data Flow Diagrams](#data-flow-diagrams)
+- ⚙️ [Request Processing Flow](#request-processing-flow)
+- 📡 [Real-Time Messaging Architecture](#real-time-messaging-architecture)
+- 🗄️ [Database Schema](#database-schema)
+- 🎯 [Design Decisions](#design-decisions)
+- 🚀 [How to Use QuickChat](#how-to-use-quickchat)
+- 💻 [Tech Stack](#tech-stack)
+- 🔮 [Future Improvements](#future-improvements)
+- 👨‍💻 [Author](#author)
 
 
 
   
-## ✨ Features
+## Features
 
 
 ### User Features
@@ -60,7 +60,7 @@ The project follows a modern client-server architecture where React handles the 
 ---
 
 
-## 🏗️ System Architecture
+## System Architecture
 
 
 QuickChat follows a 5-Layer Distributed Architecture where each layer has a dedicated responsibility. This separation improves maintainability, scalability, and security.
