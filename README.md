@@ -59,15 +59,133 @@ The project follows a modern client-server architecture where React handles the 
 
 ## 🏗️ System Architecture
 
-┌──────────────────────────────────────────────────────────────┐│                    PRESENTATION LAYER                        ││                         (React.js)                           ││                                                              ││  HomePage.jsx                                                ││  LoginPage.jsx                                               ││  ProfilePage.jsx                                             ││  ChatContainer.jsx                                           ││  SideBar.jsx                                                 ││  RightSideBar.jsx                                            ││                                                              ││  Responsibility:                                             ││  • User Interface                                            ││  • User Interaction                                          ││  • State Rendering                                           ││  • Responsive Design                                         │└──────────────────────────────────────────────────────────────┘│▼┌──────────────────────────────────────────────────────────────┐│                  STATE MANAGEMENT LAYER                      ││                      (Context API)                           ││                                                              ││  AuthContext.jsx                                             ││  ChatContext.jsx                                             ││                                                              ││  Responsibility:                                             ││  • Global User State                                         ││  • Authentication State                                      ││  • Active Chat State                                         ││  • Online Users State                                        ││  • Socket Connection Management                              │└──────────────────────────────────────────────────────────────┘│▼┌──────────────────────────────────────────────────────────────┐│                     API / SOCKET LAYER                       ││                (REST API + Socket.IO)                        ││                                                              ││  userRoutes.js                                               ││  messageRoutes.js                                            ││                                                              ││  Socket Events                                               ││   • sendMessage                                              ││   • receiveMessage                                           ││   • onlineUsers                                              ││                                                              ││  Responsibility:                                             ││  • Client-Server Communication                               ││  • Real-Time Messaging                                       ││  • User Presence Tracking                                    │└──────────────────────────────────────────────────────────────┘│▼┌──────────────────────────────────────────────────────────────┐│                  BUSINESS LOGIC LAYER                        ││                    (Express.js)                              ││                                                              ││  userController.js                                           ││  messageController.js                                        ││  auth.js                                                     ││  protectRoute.js                                             ││                                                              ││  Responsibility:                                             ││  • Authentication                                            ││  • Authorization                                             ││  • Message Processing                                        ││  • Input Validation                                          ││  • Business Rules                                            │└──────────────────────────────────────────────────────────────┘│▼┌──────────────────────────────────────────────────────────────┐│                     DATA LAYER                               ││                                                              ││  MongoDB                                                     ││   ├── Users Collection                                       ││   └── Messages Collection                                    ││                                                              ││  Cloudinary                                                  ││   └── Media Storage                                          ││                                                              ││  Responsibility:                                             ││  • Persistent Storage                                        ││  • Chat History                                              ││  • User Data                                                 ││  • Image Storage                                             │└──────────────────────────────────────────────────────────────┘
-
+QuickChat follows a 5-Layer Distributed Architecture where each layer has a dedicated responsibility. This separation improves maintainability, scalability, and security
+┌──────────────────────────────────────────────────────────────┐
+│                    PRESENTATION LAYER                        │
+│                         (React.js)                           │
+│                                                              │
+│  HomePage.jsx                                                │
+│  LoginPage.jsx                                               │
+│  ProfilePage.jsx                                             │
+│  ChatContainer.jsx                                           │
+│  SideBar.jsx                                                 │
+│  RightSideBar.jsx                                            │
+│                                                              │
+│  Responsibility:                                             │
+│  • User Interface                                            │
+│  • User Interaction                                          │
+│  • State Rendering                                           │
+│  • Responsive Design                                         │
+└──────────────────────────────────────────────────────────────┘
+                           │
+                           ▼
+┌──────────────────────────────────────────────────────────────┐
+│                  STATE MANAGEMENT LAYER                      │
+│                      (Context API)                           │
+│                                                              │
+│  AuthContext.jsx                                             │
+│  ChatContext.jsx                                             │
+│                                                              │
+│  Responsibility:                                             │
+│  • Global User State                                         │
+│  • Authentication State                                      │
+│  • Active Chat State                                         │
+│  • Online Users State                                        │
+│  • Socket Connection Management                              │
+└──────────────────────────────────────────────────────────────┘
+                           │
+                           ▼
+┌──────────────────────────────────────────────────────────────┐
+│                     API / SOCKET LAYER                       │
+│                (REST API + Socket.IO)                        │
+│                                                              │
+│  userRoutes.js                                               │
+│  messageRoutes.js                                            │
+│                                                              │
+│  Socket Events                                               │
+│   • sendMessage                                              │
+│   • receiveMessage                                           │
+│   • onlineUsers                                              │
+│                                                              │
+│  Responsibility:                                             │
+│  • Client-Server Communication                               │
+│  • Real-Time Messaging                                       │
+│  • User Presence Tracking                                    │
+└──────────────────────────────────────────────────────────────┘
+                           │
+                           ▼
+┌──────────────────────────────────────────────────────────────┐
+│                  BUSINESS LOGIC LAYER                        │
+│                    (Express.js)                              │
+│                                                              │
+│  userController.js                                           │
+│  messageController.js                                        │
+│  auth.js                                                     │
+│  protectRoute.js                                             │
+│                                                              │
+│  Responsibility:                                             │
+│  • Authentication                                            │
+│  • Authorization                                             │
+│  • Message Processing                                        │
+│  • Input Validation                                          │
+│  • Business Rules                                            │
+└──────────────────────────────────────────────────────────────┘
+                           │
+                           ▼
+┌──────────────────────────────────────────────────────────────┐
+│                     DATA LAYER                               │
+│                                                              │
+│  MongoDB                                                     │
+│   ├── Users Collection                                       │
+│   └── Messages Collection                                    │
+│                                                              │
+│  Cloudinary                                                  │
+│   └── Media Storage                                          │
+│                                                              │
+│  Responsibility:                                             │
+│  • Persistent Storage                                        │
+│  • Chat History                                              │
+│  • User Data                                                 │
+│  • Image Storage                                             │
+└──────────────────────────────────────────────────────────────┘
 
 ---
 
 
 ## 🌐 High-Level System Design
 
-┌───────────────┐│     User      │└───────┬───────┘│▼┌─────────────────────────┐│     React Frontend      │└───────────┬─────────────┘│┌─────────────────┴─────────────────┐│                                   │▼                                   ▼┌─────────────────┐               ┌─────────────────┐│   REST APIs     │               │   Socket.IO     ││ Authentication  │               │ Real-Time Chat  │└────────┬────────┘               └────────┬────────┘│                                 │└──────────────┬──────────────────┘▼┌─────────────────────┐│  Express + Node.js  │└──────────┬──────────┘│┌───────────────┼────────────────┐│                                │▼                                ▼┌─────────────────┐            ┌─────────────────┐│    MongoDB      │            │   Cloudinary    ││                 │            │                 ││ Users           │            │ Images          ││ Messages        │            │ Media Files     │└─────────────────┘            └─────────────────┘
+                   ┌───────────────┐
+                   │     User      │
+                   └───────┬───────┘
+                           │
+                           ▼
+              ┌─────────────────────────┐
+              │     React Frontend      │
+              └───────────┬─────────────┘
+                          │
+        ┌─────────────────┴─────────────────┐
+        │                                   │
+        ▼                                   ▼
+┌─────────────────┐               ┌─────────────────┐
+│   REST APIs     │               │   Socket.IO     │
+│ Authentication  │               │ Real-Time Chat  │
+└────────┬────────┘               └────────┬────────┘
+         │                                 │
+         └──────────────┬──────────────────┘
+                        ▼
+             ┌─────────────────────┐
+             │  Express + Node.js  │
+             └──────────┬──────────┘
+                        │
+        ┌───────────────┼────────────────┐
+        │                                │
+        ▼                                ▼
+┌─────────────────┐            ┌─────────────────┐
+│    MongoDB      │            │   Cloudinary    │
+│                 │            │                 │
+│ Users           │            │ Images          │
+│ Messages        │            │ Media Files     │
+└─────────────────┘            └─────────────────┘
 
 ---
 
@@ -425,12 +543,32 @@ This architecture ensures reliable message delivery by combining real-time Socke
 
 
 1. Register or Login
+
+Create a new account using your email and password, or log in with existing credentials.
+
 2. View Users
+
+Browse all available users from the sidebar. Online users are updated in real time.
+
 3. Start a Chat
+
+Select any user to open a conversation. Previous messages are automatically loaded.
+
 4. Send Messages
+
+Type a message and click Send. Messages are instantly delivered through Socket.IO.
+
 5. Share Images
+
+Upload images directly in chat. Files are stored using Cloudinary.
+
 6. Track User Presence
+
+See online and offline users in real time.
+
 7. Logout
+
+Securely logout and disconnect the active socket session.
 
 ---
 
@@ -473,6 +611,9 @@ This architecture ensures reliable message delivery by combining real-time Socke
 - Introduce Redis for scalable real-time user session management.
 - Support File Sharing (PDFs, Documents, ZIP files).
 - Add Message Reactions, Emojis, and Dark Mode support.
+
+
+---
   
 
 ## 👨‍💻 Author
@@ -481,7 +622,6 @@ This architecture ensures reliable message delivery by combining real-time Socke
 **Gaurav Patil**
 
 - Walchand College of Engineering, Sangli
-- Assistant Aptitude Developer, ACSES
 - MERN Stack & Competitive Programming Enthusiast
 
 ---
