@@ -59,7 +59,10 @@ The project follows a modern client-server architecture where React handles the 
 
 ## 🏗️ System Architecture
 
-QuickChat follows a 5-Layer Distributed Architecture where each layer has a dedicated responsibility. This separation improves maintainability, scalability, and security
+
+QuickChat follows a 5-Layer Distributed Architecture where each layer has a dedicated responsibility. This separation improves maintainability, scalability, and security.
+
+```text
 ┌──────────────────────────────────────────────────────────────┐
 │                    PRESENTATION LAYER                        │
 │                         (React.js)                           │
@@ -148,12 +151,15 @@ QuickChat follows a 5-Layer Distributed Architecture where each layer has a dedi
 │  • User Data                                                 │
 │  • Image Storage                                             │
 └──────────────────────────────────────────────────────────────┘
+```
 
 ---
 
 
 ## 🌐 High-Level System Design
 
+
+```text
                    ┌───────────────┐
                    │     User      │
                    └───────┬───────┘
@@ -186,6 +192,8 @@ QuickChat follows a 5-Layer Distributed Architecture where each layer has a dedi
 │ Users           │            │ Images          │
 │ Messages        │            │ Media Files     │
 └─────────────────┘            └─────────────────┘
+```
+
 
 ---
 
