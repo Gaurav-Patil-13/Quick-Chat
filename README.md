@@ -4,7 +4,7 @@ QuickChat is a full-stack real-time messaging platform built using the MERN Stac
 
 The project follows a modern client-server architecture where React handles the frontend user interface, Express and Node.js provide REST APIs and Socket.IO communication, MongoDB stores application data, and Cloudinary manages media uploads. The application is fully responsive and optimized for both desktop and mobile devices.
 
-![React](https://img.shields.io/badge/React-19-blue)
+![React](https://img.shields.io/badge/React-Frontend-blue)
 ![Node.js](https://img.shields.io/badge/Node.js-Backend-green)
 ![MongoDB](https://img.shields.io/badge/MongoDB-Database-brightgreen)
 ![Socket.IO](https://img.shields.io/badge/Socket.IO-RealTime-black)
@@ -28,6 +28,37 @@ The project follows a modern client-server architecture where React handles the 
 - 👨‍💻 [Author](#author)
 
 
+
+## 📸 Screenshots
+
+### 🔐 Login Page
+Secure user authentication with JWT-based login and registration.
+
+![Login Page]("D:\PROJECTS\CHAT-BOX\github_image\login-page.jpeg")
+
+---
+
+### 💬 Real-Time Chat Interface
+Instant messaging with Socket.IO, image sharing, and real-time communication.
+
+![Chat Interface]("D:\PROJECTS\CHAT-BOX\github_image\chat-interface.jpeg")
+
+---
+
+### 👥 User Directory
+Browse and search available users to start conversations.
+
+![User Directory]("D:\PROJECTS\CHAT-BOX\github_image\user-directory.jpeg")
+
+---
+
+### 👤 User Profile & Shared Media
+View profile information, uploaded media, and account details.
+
+![Profile Page]("D:\PROJECTS\CHAT-BOX\github_image\profile-page.jpeg")
+
+
+---
 
   
 ## Features
@@ -159,8 +190,7 @@ QuickChat follows a 5-Layer Distributed Architecture where each layer has a dedi
 ---
 
 
-## 🌐 High-Level System Design
-
+## High-Level System Design
 
 ```text
                    ┌───────────────┐
@@ -201,7 +231,7 @@ QuickChat follows a 5-Layer Distributed Architecture where each layer has a dedi
 ---
 
 
-## 📂 Project Structure
+## Project Structure
 
 
 ```text
@@ -263,7 +293,7 @@ QuickChat/
 ---
 
 
-## 🔄 Data Flow Diagrams
+## Data Flow Diagrams
 
 
 ### Registration Flow
@@ -402,7 +432,7 @@ Update Online Users List
 Broadcast Status
 ```
 
-## ⚙️ Request Processing Flow
+## Request Processing Flow
 
 
 ```text
@@ -441,7 +471,7 @@ This flow demonstrates how user requests travel through the frontend, backend, m
 ---
 
 
-## 📡 Real-Time Messaging Architecture
+## Real-Time Messaging Architecture
 
 
 ```text
@@ -478,7 +508,7 @@ This architecture ensures reliable message delivery by combining real-time Socke
 ---
 
 
-## 🗄️ Database Schema
+## Database Schema
 
 
 ### User Collection
@@ -525,7 +555,7 @@ This architecture ensures reliable message delivery by combining real-time Socke
 ---
 
 
-## 🎯 Design Decisions
+## Design Decisions
 
 
 | Design Decision | Why |
@@ -550,7 +580,134 @@ This architecture ensures reliable message delivery by combining real-time Socke
 ---
 
 
+## Installation Guide
+
+
+### Prerequisites
+
+Before running the project, ensure you have the following installed:
+
+* Node.js (v18 or above)
+* npm
+* MongoDB Atlas Account
+* Cloudinary Account
+* Git
+
+### Clone the Repository
+
+```bash
+git clone https://github.com/yourusername/QuickChat.git
+
+cd QuickChat
+```
+
+### Backend Setup
+
+```bash
+cd Server
+
+npm install
+```
+
+Create a `.env` file inside the **Server** directory:
+
+```env
+PORT=5000
+
+MONGODB_URI=your_mongodb_connection_string
+
+JWT_SECRET=your_jwt_secret
+
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+
+CLOUDINARY_API_KEY=your_api_key
+
+CLOUDINARY_API_SECRET=your_api_secret
+```
+
+Start the backend server:
+
+```bash
+npm run server
+```
+
+### Frontend Setup
+
+```bash
+cd Client
+
+npm install
+```
+
+Create a `.env` file inside the **Client** directory:
+
+```env
+VITE_BACKEND_URL=http://localhost:5000
+```
+
+Start the frontend:
+
+```bash
+npm run dev
+```
+
+### Run Application
+
+Backend:
+
+```bash
+cd Server
+npm run server
+```
+
+Frontend:
+
+```bash
+cd Client
+npm run dev
+```
+
+Open your browser and visit:
+
+```text
+http://localhost:5173
+```
+
+---
+
 ## 🚀 How to Use QuickChat
+
+### 1. Register or Login
+
+Create a new account using your email and password, or log in with existing credentials.
+
+### 2. View Users
+
+Browse all available users from the sidebar. Online users are updated in real time.
+
+### 3. Start a Chat
+
+Select any user to open a conversation. Previous messages are automatically loaded.
+
+### 4. Send Messages
+
+Type a message and click **Send**. Messages are instantly delivered through Socket.IO.
+
+### 5. Share Images
+
+Upload images directly in chat. Files are securely stored using Cloudinary.
+
+### 6. Track User Presence
+
+View online and offline users in real time.
+
+### 7. Logout
+
+Securely logout and disconnect the active socket session.
+
+
+
+## How to Use QuickChat
 
 | Step | Action |
 |------|---------|
@@ -564,7 +721,7 @@ This architecture ensures reliable message delivery by combining real-time Socke
 
 ---
 
-## 💻 Tech Stack
+## Tech Stack
 
 
 ### Frontend
@@ -590,7 +747,7 @@ This architecture ensures reliable message delivery by combining real-time Socke
 ---
 
 
-## 🚀 Future Improvements
+## Future Improvements
 
 
 - Add Group Chat functionality for communication among multiple users.
@@ -608,7 +765,7 @@ This architecture ensures reliable message delivery by combining real-time Socke
 ---
   
 
-## 👨‍💻 Author
+## Author
 
 
 **Gaurav Patil**
