@@ -549,34 +549,15 @@ This architecture ensures reliable message delivery by combining real-time Socke
 
 ## 🚀 How to Use QuickChat
 
-
-1. Register or Login
-
-Create a new account using your email and password, or log in with existing credentials.
-
-2. View Users
-
-Browse all available users from the sidebar. Online users are updated in real time.
-
-3. Start a Chat
-
-Select any user to open a conversation. Previous messages are automatically loaded.
-
-4. Send Messages
-
-Type a message and click Send. Messages are instantly delivered through Socket.IO.
-
-5. Share Images
-
-Upload images directly in chat. Files are stored using Cloudinary.
-
-6. Track User Presence
-
-See online and offline users in real time.
-
-7. Logout
-
-Securely logout and disconnect the active socket session.
+| Step | Action |
+|------|---------|
+| **1** | Register a new account or login using existing credentials. |
+| **2** | Browse available users from the sidebar. |
+| **3** | Select a user to start a conversation. |
+| **4** | Send messages instantly using Socket.IO. |
+| **5** | Share images and media through Cloudinary integration. |
+| **6** | View real-time online/offline user status. |
+| **7** | Logout securely and disconnect the active session. |
 
 ---
 
