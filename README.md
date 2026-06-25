@@ -34,7 +34,7 @@ The project follows a modern client-server architecture where React handles the 
 ---
 
 
-## 📸 UI Preview
+## UI Preview
 
 ### 🔐 Login Page
 Secure user authentication with JWT-based login and registration.
@@ -681,39 +681,6 @@ Open your browser and visit:
 ```text
 http://localhost:5173
 ```
-
----
-
-
-## 🚀 How to Use QuickChat
-
-### 1. Register or Login
-
-Create a new account using your email and password, or log in with existing credentials.
-
-### 2. View Users
-
-Browse all available users from the sidebar. Online users are updated in real time.
-
-### 3. Start a Chat
-
-Select any user to open a conversation. Previous messages are automatically loaded.
-
-### 4. Send Messages
-
-Type a message and click **Send**. Messages are instantly delivered through Socket.IO.
-
-### 5. Share Images
-
-Upload images directly in chat. Files are securely stored using Cloudinary.
-
-### 6. Track User Presence
-
-View online and offline users in real time.
-
-### 7. Logout
-
-Securely logout and disconnect the active socket session.
 
 
 ---
