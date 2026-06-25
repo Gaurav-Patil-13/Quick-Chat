@@ -13,6 +13,8 @@ The project follows a modern client-server architecture where React handles the 
 
 ## 📑 Table of Contents
 
+
+- 🎨 [UI Preview](#ui-preview)
 - ✨ [Features](#features)
 - 🏗️ [System Architecture](#system-architecture)
 - 🌐 [High-Level System Design](#high-level-system-design)
@@ -22,40 +24,43 @@ The project follows a modern client-server architecture where React handles the 
 - 📡 [Real-Time Messaging Architecture](#real-time-messaging-architecture)
 - 🗄️ [Database Schema](#database-schema)
 - 🎯 [Design Decisions](#design-decisions)
+- ⚙️ [Installation Guide](#installation-guide)
 - 🚀 [How to Use QuickChat](#how-to-use-quickchat)
 - 💻 [Tech Stack](#tech-stack)
 - 🔮 [Future Improvements](#future-improvements)
 - 👨‍💻 [Author](#author)
 
 
+---
 
-## 📸 Screenshots
+
+## 📸 UI Preview
 
 ### 🔐 Login Page
 Secure user authentication with JWT-based login and registration.
 
-![Login Page]("D:\PROJECTS\CHAT-BOX\github_image\login-page.jpeg")
+![Login Page](./github_image/login-page.jpeg)
 
 ---
 
 ### 💬 Real-Time Chat Interface
 Instant messaging with Socket.IO, image sharing, and real-time communication.
 
-![Chat Interface]("D:\PROJECTS\CHAT-BOX\github_image\chat-interface.jpeg")
+![Chat Interface](./github_image/chat-interface.jpeg)
 
 ---
 
 ### 👥 User Directory
 Browse and search available users to start conversations.
 
-![User Directory]("D:\PROJECTS\CHAT-BOX\github_image\user-directory.jpeg")
+![User Directory](./github_image/user-directory.jpeg)
 
 ---
 
 ### 👤 User Profile & Shared Media
 View profile information, uploaded media, and account details.
 
-![Profile Page]("D:\PROJECTS\CHAT-BOX\github_image\profile-page.jpeg")
+![Profile Page](./github_image/profile-page.jpeg)
 
 
 ---
@@ -187,7 +192,9 @@ QuickChat follows a 5-Layer Distributed Architecture where each layer has a dedi
 └──────────────────────────────────────────────────────────────┘
 ```
 
+
 ---
+
 
 
 ## High-Level System Design
@@ -289,6 +296,7 @@ QuickChat/
 │
 └── README.md
 ```
+
 
 ---
 
@@ -577,6 +585,7 @@ This architecture ensures reliable message delivery by combining real-time Socke
 | Responsive UI Design | Ensures seamless usability across desktop, tablet, and mobile devices. |
 | Cloud-Based Deployment (Vercel + Render) | Enables easy deployment, scalability, and accessibility from any location. |
 
+
 ---
 
 
@@ -675,6 +684,7 @@ http://localhost:5173
 
 ---
 
+
 ## 🚀 How to Use QuickChat
 
 ### 1. Register or Login
@@ -706,6 +716,8 @@ View online and offline users in real time.
 Securely logout and disconnect the active socket session.
 
 
+---
+
 
 ## How to Use QuickChat
 
@@ -719,7 +731,9 @@ Securely logout and disconnect the active socket session.
 | **6** | View real-time online/offline user status. |
 | **7** | Logout securely and disconnect the active session. |
 
+
 ---
+
 
 ## Tech Stack
 
@@ -743,6 +757,7 @@ Securely logout and disconnect the active socket session.
 ### Deployment
 - Vercel (Frontend)
 - Render (Backend)
+
 
 ---
 
