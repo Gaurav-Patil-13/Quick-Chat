@@ -11,20 +11,22 @@ The project follows a modern client-server architecture where React handles the 
 ![JWT](https://img.shields.io/badge/JWT-Authentication-orange)
 ![Cloudinary](https://img.shields.io/badge/Cloudinary-Media-blueviolet)
 
-## 📑 Table of Contents
+## Table of Contents
 
-- Features
-- System Architecture
-- High-Level System Design
-- Project Structure
-- Data Flow Diagrams
-- Request Processing Flow
-- Real-Time Messaging Architecture
-- Database Schema
-- Design Decisions
-- How to Use QuickChat
-- Tech Stack
-- Future Improvements
+* [✨ Features](#features)
+* [🏗️ System Architecture](#system-architecture)
+* [🌐 High-Level System Design](#high-level-system-design)
+* [📂 Project Structure](#project-structure)
+* [🔄 Data Flow Diagrams](#data-flow-diagrams)
+* [⚙️ Request Processing Flow](#request-processing-flow)
+* [📡 Real-Time Messaging Architecture](#real-time-messaging-architecture)
+* [🗄️ Database Schema](#database-schema)
+* [🎯 Design Decisions](#design-decisions)
+* [🚀 How to Use QuickChat](#how-to-use-quickchat)
+* [💻 Tech Stack](#tech-stack)
+* [🔮 Future Improvements](#future-improvements)
+* [👨‍💻 Author](#author)
+
 
   
 ## ✨ Features
