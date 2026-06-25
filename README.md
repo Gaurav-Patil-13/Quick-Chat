@@ -39,28 +39,28 @@ The project follows a modern client-server architecture where React handles the 
 ### 🔐 Login Page
 Secure user authentication with JWT-based login and registration.
 
-![Login Page](./github_image/login-page.jpeg)
+![Login Page](github_image/login-page.jpeg)
 
 ---
 
 ### 💬 Real-Time Chat Interface
 Instant messaging with Socket.IO, image sharing, and real-time communication.
 
-![Chat Interface](./github_image/chat-interface.jpeg)
+![Chat Interface](github_image/chat-interface.jpeg)
 
 ---
 
 ### 👥 User Directory
 Browse and search available users to start conversations.
 
-![User Directory](./github_image/user-directory.jpeg)
+![User Directory](github_image/user-directory.jpeg)
 
 ---
 
 ### 👤 User Profile & Shared Media
 View profile information, uploaded media, and account details.
 
-![Profile Page](./github_image/profile-page.jpeg)
+![Profile Page](github_image/profile-page.jpeg)
 
 
 ---
